@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Container, Form, ListGroup, InputGroup, Button, Row, Col } from 'react-bootstrap';
 
 import ToDo from '../ToDo';
 
@@ -14,8 +15,8 @@ class App extends Component {
         this._handleSubmit = this._handleSubmit.bind(this);
     }
 
-    _saveTasks(state) {
-        localStorage.setItem('toDos', JSON.stringify(state));
+    componentDidUpdate() {
+        localStorage.setItem('toDos', JSON.stringify(this.state.toDos));
     }
 
     _toggleTask(task, index) {
@@ -34,14 +35,11 @@ class App extends Component {
 
         // Rerender
         this.forceUpdate();
-        this._saveTasks(state);
     }
 
     // Download & Render Tasks
     _fetchTasks() {
         let saved = JSON.parse(localStorage.getItem('toDos'));
-
-        console.log(saved);
 
         if (saved != null) {
             this.setState({toDos: saved});
@@ -79,16 +77,16 @@ class App extends Component {
         
         // Update date
         this.setState({toDos: state});
-
+        this.setState({newTask: ''})
         this.forceUpdate();
     }
 
     render() {
 
         return (
-            <main>
-                <h1>To Do App</h1>
-                <ul>
+            <Container>
+                <h1 className='text-center mb-3'>To Do App</h1>
+                <ListGroup as='ul'>
                     {this.state.toDos.map((toDo, index) => {
                     return <ToDo
                                 key={index}
@@ -96,19 +94,45 @@ class App extends Component {
                                 onClick={() => this._toggleTask(toDo, index) }
                             />
                     })}
-                </ul>
-                <form onSubmit={this._handleSubmit}>
-                    <h3>Create new task</h3>
-                    <input 
-                        value={this.state.newTask}
-                        placeholder={'What is your task?'} onChange={this._handleChange} />
-                    <button type={'submit'}>Create</button>
-                </form>
-                <div>
-                    <h2>Extra Features</h2>
+                </ListGroup>
+                <Form className="mt-5" onSubmit={this._handleSubmit}>
+                    <h3 className="mb-3">Create new task</h3>
+                    <InputGroup controlId="newTask">
+                        <InputGroup.Prepend>
+                            <InputGroup.Text>Task:</InputGroup.Text>
+                        </InputGroup.Prepend>
+                        <Form.Control
+                            type="text" 
+                            value={this.state.newTask}
+                            placeholder={'What is your task?'} 
+                            onChange={this._handleChange} />
+                            <InputGroup.Append>
+                                <Button variant="primary" type={'submit'}>Create</Button>
+                            </InputGroup.Append>
+                    </InputGroup>
+                </Form>
+                <div className="mt-5">
+                    <h3 className="mb-3">Extra Features</h3>
                     <button onClick={() => {this._clear()}}>Switch to defaults</button>
                 </div>
-            </main>
+                <Row className="mt-5">
+                    <Col>
+                        <h3>Implemented Features</h3>
+                        <ul>
+                            <li>Add new tasks</li>
+                            <li>Toggle task's state</li>
+                            <li>Save & Load Tasks from "localStorage"</li>
+                        </ul>
+                    </Col>
+                    <Col>
+                        <h3>Feather features</h3>
+                        <ul>
+                            <li>Remove Task</li>
+                            <li>Sort Tasks</li>
+                        </ul>
+                    </Col>
+                </Row>
+            </Container>
          );
     }
 }

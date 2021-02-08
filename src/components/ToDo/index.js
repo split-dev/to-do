@@ -1,18 +1,21 @@
+import { ListGroup, Button } from 'react-bootstrap';
+
+
 function ToDo(props) {
-    let btnText = props.value.state ? 'done' : 'undone';
+    var attr = {};
+    if (props.value.state) {
+        attr['disabled'] = 'disabled';
+    }
     return (
-        <li>
-            <p>{props.value.task}</p>
-            <div>
+        <ListGroup.Item as='li' {...attr}>
+            <div className='d-flex align-items-center justify-content-between'>
+                <p className="mb-0">{props.value.task}</p>
                 {props.value.state
-                    ? <span style={{color: 'green'}}>Task is done</span>
-                    : <span style={{color: 'red'}}>Task is not done</span>
+                    ? <Button className="ml-2" onClick={props.onClick} variant="success" size='sm'>✓</Button>
+                    : <Button className="ml-2" onClick={props.onClick} variant="danger" size='sm'>✕</Button>
                 }
-                <button style={{marginLeft: '15px'}} onClick={props.onClick}>
-                Mark as {btnText}
-                </button>
             </div>
-        </li>
+        </ListGroup.Item>
         );
 }
  
