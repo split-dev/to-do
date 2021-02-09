@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
-import { Container, Form, ListGroup, InputGroup, Button, Row, Col } from 'react-bootstrap';
+import { Container, Form, ListGroup, InputGroup, Button } from 'react-bootstrap';
 
 import ToDo from '../ToDo';
+import Features from '../Features';
+import Extra from '../Extra';
 
 class App extends Component {
     constructor(props) {
@@ -111,28 +113,8 @@ class App extends Component {
                             </InputGroup.Append>
                     </InputGroup>
                 </Form>
-                <div className="mt-5">
-                    <h3 className="mb-3">Extra Features</h3>
-                    <button onClick={() => {this._clear()}}>Switch to defaults</button>
-                </div>
-                <Row className="mt-5">
-                    <Col>
-                        <h3>Implemented Features</h3>
-                        <ul>
-                            <li>Add new tasks</li>
-                            <li>Toggle task's state</li>
-                            <li>Save & Load Tasks from "localStorage"</li>
-                            <li>Add to your mobile (manifest.json)</li>
-                        </ul>
-                    </Col>
-                    <Col>
-                        <h3>Feather features</h3>
-                        <ul>
-                            <li>Remove Task</li>
-                            <li>Sort Tasks</li>
-                        </ul>
-                    </Col>
-                </Row>
+                <Extra onClick={() => this._clear()}></Extra>
+                <Features></Features>
             </Container>
          );
     }
