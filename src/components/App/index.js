@@ -85,7 +85,7 @@ class App extends Component {
 
         return (
             <Container>
-                <h1 className='text-center mb-3'>To Do App</h1>
+                <h1 className='text-center mb-3'>To Do List</h1>
                 <ListGroup as='ul'>
                     {this.state.toDos.map((toDo, index) => {
                     return <ToDo
