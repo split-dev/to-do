@@ -9,7 +9,7 @@ function Features() {
                     <li>Add new tasks</li>
                     <li>Toggle task's state</li>
                     <li>Save & Load Tasks from "localStorage"</li>
-                    <li>Add to your mobile (manifest.json)</li>
+                    <li>Add to your mobile (PWA)</li>
                 </ul>
             </Col>
             <Col>
