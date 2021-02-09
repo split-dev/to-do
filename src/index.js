@@ -7,9 +7,13 @@ import * as serviceWorker from './serviceWorker';
 
 import './styles/app.scss';
 
+// Get Taks from memory
+const memory = localStorage.getItem('toDos');
+
+// Load if saved || load clear app
 ReactDOM.render(
-    localStorage.getItem('toDos')
-        ? <App value={JSON.parse(localStorage.getItem('toDos'))} />
+    memory
+        ? <App value={JSON.parse(memory)} />
         : <App value={[]} />
     ,
     document.getElementById('root')

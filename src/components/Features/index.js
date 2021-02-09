@@ -15,7 +15,7 @@ function Features() {
             <Col>
                 <h3 className="mb-3">Feather features</h3>
                 <ul>
-                    <li>Make it work offline</li>
+                    <li>Make it work offline (works partially. Tasks are hidden - localStorage issue. But at least it do not closes)</li>
                     <li>Remove Task</li>
                     <li>Sort Tasks</li>
                 </ul>

@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
-import { Container, Form, ListGroup, InputGroup, Button } from 'react-bootstrap';
+import { Container, ListGroup } from 'react-bootstrap';
 
-import ToDo from '../ToDo';
-import Features from '../Features';
-import Extra from '../Extra';
+import { ToDo, NewTask, Features, Extra } from '../components';
 
 class App extends Component {
     constructor(props) {
@@ -51,7 +49,7 @@ class App extends Component {
         this.forceUpdate();
     }
 
-    // Clear or tasks
+    // Clear all tasks
     _clear() {
         localStorage.removeItem('toDos');
         this._fetchTasks();
@@ -66,17 +64,15 @@ class App extends Component {
     _handleSubmit(e) {
         e.preventDefault();
         
-        // Make a copy
+        // Make a copy & Mutate
         let state = [...this.state.toDos];
-
-        // Mutate
         state.push(
             {
                 task: this.state.newTask,
                 state: false
             },
         )
-        
+
         // Update date
         this.setState({toDos: state});
         this.setState({newTask: ''})
@@ -97,22 +93,11 @@ class App extends Component {
                             />
                     })}
                 </ListGroup>
-                <Form className="mt-5" onSubmit={this._handleSubmit}>
-                    <h3 className="mb-3">Create new task</h3>
-                    <InputGroup controlId="newTask">
-                        <InputGroup.Prepend>
-                            <InputGroup.Text>Task:</InputGroup.Text>
-                        </InputGroup.Prepend>
-                        <Form.Control
-                            type="text" 
-                            value={this.state.newTask}
-                            placeholder={'What is your task?'} 
-                            onChange={this._handleChange} />
-                            <InputGroup.Append>
-                                <Button variant="primary" type={'submit'}>Create</Button>
-                            </InputGroup.Append>
-                    </InputGroup>
-                </Form>
+                <NewTask 
+                    onSubmit={this._handleSubmit}
+                    value={this.state.newTask}
+                    onChange={this._handleChange}
+                    ></NewTask>
                 <Extra onClick={() => this._clear()}></Extra>
                 <Features></Features>
             </Container>
